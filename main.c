@@ -2,12 +2,62 @@
 
 int deal_key(int key, t_mlx *mlx)
 {
+	t_coord **map;
+
 	ft_printf("%s\n", key == 53 ? "ESC" : "key");
 	if (key == 53)
 	{
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 		exit(1);
 	}
+	else if (key == 123)
+	{
+		mlx->mod.strt_x += 10;
+		mlx->mod.nl = 10;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		map = parse_map(mlx);
+		draw_map(map, mlx);
+	}
+	else if (key == 124)
+	{
+		mlx->mod.strt_x -= 10;
+		mlx->mod.nl = 10;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		map = parse_map(mlx);
+		draw_map(map, mlx);
+	}
+	else if (key == 126)
+	{
+		mlx->mod.altd++;
+		mlx->mod.nl = 10;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		map = parse_map(mlx);
+		draw_map(map, mlx);
+	}
+	else if (key == 125)
+	{
+		mlx->mod.altd--;
+		mlx->mod.nl = 10;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		map = parse_map(mlx);
+		draw_map(map, mlx);
+	}
+	/*if (key == 115)
+	{
+		mlx->mod.x += 1;
+		mlx->mod.nl = 10;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		map = parse_map(mlx);
+		draw_map(map, mlx);
+	}
+	if (key == 119)
+	{
+		mlx->mod.x -= 1;
+		mlx->mod.nl = 10;
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		map = parse_map(mlx);
+		draw_map(map, mlx);
+	}*/
 	return (0);
 }
 
@@ -15,70 +65,25 @@ int main(int argc, char **argv)
 {
 	t_mlx	mlx;
 	t_coord **map;
-	t_coord	coord0;
-	t_coord coord1;
-	int x;
-	int y;
-	int dx;
-	int dy;
 
 	if (argc != 2)
 	{
 		ft_printf("Usege: ... for %s\n", argv[1]);
 		return (0);
 	}
-	map = parse_map(argv[1]);
+	mlx.map_name = argv[1];
+	mlx.mod.nl = 10;
+	mlx.mod.strt_x = 200;
+	mlx.mod.strt_y = 100;
+	//mlx.mod.x = 1;
+	//mlx.mod.y = 1;
+	mlx.mod.altd = 1;
+	map = parse_map(&mlx);
 	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 500, 500, "mlx");
-	x = 10;
-	y = 10;
-	dx = 40;
-	dy = 15;
-	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 500, 500, "mlx");
-	mlx.color = 255;
-	coord0.crd.x = x + dx;
-	coord0.crd.y = y + dy;
-	coord1.crd.x = x + dx * 2;
-	coord1.crd.y = y + dy * 2;
-	draw_map(&mlx, &coord0, &coord1);
-	coord0.crd.x = x + dx * 2;
-	coord0.crd.y = y + dy * 2;
-	coord1.crd.x = x + dx * 3 + 15;
-	coord1.crd.y = y + dy * 3 - 15;
-	draw_map(&mlx, &coord0, &coord1);
-	coord0.crd.x = x + dx * 3 + 15;
-	coord0.crd.y = y + dy * 3 - 15;
-	coord1.crd.x = x + dx * 4;
-	coord1.crd.y = y + dy * 4;
-	draw_map(&mlx, &coord0, &coord1);
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, mlx.wind_x, mlx.wind_y, "mlx");
+	mlx.color = 0xffffff;
+	draw_map(map, &mlx);
 	mlx_key_hook(mlx.win_ptr, deal_key, &mlx);
 	mlx_loop(mlx.mlx_ptr);
-
 	return 0;
 }
-
-/*
-	x = 10;
-	y = 10;
-	dx = 40;
-	dy = 15;
-	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 500, 500, "mlx");
-	mlx.color = 255;
-	coord.c0.x = x + dx;
-	coord.c0.y = y + dy;
-	coord.c1.x = x + dx * 2;
-	coord.c1.y = y + dy * 2;
-	draw_map(&mlx, &coord);
-	coord.c0.x = x + dx * 2;
-	coord.c0.y = y + dy * 2;
-	coord.c1.x = x + dx * 3 + 15;
-	coord.c1.y = y + dy * 3 - 15;
-	draw_map(&mlx, &coord);
-	coord.c0.x = x + dx * 3 + 15;
-	coord.c0.y = y + dy * 3 - 15;
-	coord.c1.x = x + dx * 4;
-	coord.c1.y = y + dy * 4;
-	draw_map(&mlx, &coord);
- */

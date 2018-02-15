@@ -12,13 +12,42 @@
 
 #include "fdf.h"
 
-void draw_map(t_mlx *mlx, t_coord *coord0, t_coord *coord1)
+void draw_map(t_coord **map, t_mlx *mlx)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < mlx->rows)
+	{
+		j = 0;
+		while (j < mlx->col - 1)
+		{
+			draw_line(mlx, &map[i][j], &map[i][j + 1]);
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < mlx->rows - 1)
+	{
+		j = 0;
+		while (j < mlx->col)
+		{
+			draw_line(mlx, &map[i][j], &map[i + 1][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void draw_line(t_mlx *mlx, t_coord *coord0, t_coord *coord1)
 {
 	int y;
 	int x;
 
 	y = (coord1->crd.y - coord0->crd.y) < 0 ? -(coord1->crd.y - coord0->crd.y)
-										: (coord0->crd.y - coord0->crd.y);
+										: (coord1->crd.y - coord0->crd.y);
 	x = (coord1->crd.x - coord0->crd.x) < 0 ? -(coord1->crd.x - coord0->crd.x)
 										: (coord1->crd.x - coord0->crd.x);
 	if (x > y)
@@ -64,7 +93,7 @@ void	draw_down(t_mlx *mlx, t_xy c0, t_xy c1)
 		}
 		D = D + 2 * dy;
 		c0.x++;
-		mlx->color--;
+		//mlx->color--;
 	}
 }
 
@@ -95,6 +124,6 @@ void	draw_up(t_mlx *mlx, t_xy c0, t_xy c1)
 		}
 		D = D + 2 * dx;
 		c0.y++;
-		mlx->color--;
+		//mlx->color--;
 	}
 }
