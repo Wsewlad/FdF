@@ -6,7 +6,7 @@
 /*   By: vfil <vfil@student.unit.ua>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:43:41 by vfil              #+#    #+#             */
-/*   Updated: 2018/02/24 16:36:31 by vfil             ###   ########.fr       */
+/*   Updated: 2018/02/24 16:58:00 by vfil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,5 @@ int		main(int argc, char **argv)
 	mlx_hook(mapp.win_ptr, 2, 5, deal_key, &mapp);
 	mlx_hook(mapp.win_ptr, 17, 1L << 17, exit_x, 0);
 	mlx_loop(mapp.mlx_ptr);
-	system("leaks fdf");
 	return (0);
 }
