@@ -7,6 +7,10 @@ add_executable(
         libft.h
         fdf.h
         main.c
-        draw_map.c
         parse_map.c
+        draw_map.c
+        rotate.c
+        shift.c
+        del_copy_scale_center.c
+        bonus.c
 )

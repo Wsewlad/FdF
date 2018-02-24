@@ -123,87 +123,6 @@ libft.h/fast:
 	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/build
 .PHONY : libft.h/fast
 
-draw_map.o: draw_map.c.o
-
-.PHONY : draw_map.o
-
-# target to build an object file
-draw_map.c.o:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/draw_map.c.o
-.PHONY : draw_map.c.o
-
-draw_map.i: draw_map.c.i
-
-.PHONY : draw_map.i
-
-# target to preprocess a source file
-draw_map.c.i:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/draw_map.c.i
-.PHONY : draw_map.c.i
-
-draw_map.s: draw_map.c.s
-
-.PHONY : draw_map.s
-
-# target to generate assembly for a file
-draw_map.c.s:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/draw_map.c.s
-.PHONY : draw_map.c.s
-
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/main.c.s
-.PHONY : main.c.s
-
-parse_map.o: parse_map.c.o
-
-.PHONY : parse_map.o
-
-# target to build an object file
-parse_map.c.o:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/parse_map.c.o
-.PHONY : parse_map.c.o
-
-parse_map.i: parse_map.c.i
-
-.PHONY : parse_map.i
-
-# target to preprocess a source file
-parse_map.c.i:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/parse_map.c.i
-.PHONY : parse_map.c.i
-
-parse_map.s: parse_map.c.s
-
-.PHONY : parse_map.s
-
-# target to generate assembly for a file
-parse_map.c.s:
-	$(MAKE) -f CMakeFiles/libft.h.dir/build.make CMakeFiles/libft.h.dir/parse_map.c.s
-.PHONY : parse_map.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +132,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... libft.h"
-	@echo "... draw_map.o"
-	@echo "... draw_map.i"
-	@echo "... draw_map.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... parse_map.o"
-	@echo "... parse_map.i"
-	@echo "... parse_map.s"
 .PHONY : help
 
 

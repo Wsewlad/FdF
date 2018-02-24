@@ -12,66 +12,66 @@
 
 #include "fdf.h"
 
-void draw_map(t_coord **map, t_mlx *mlx)
+void	draw_map(t_map mapp)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < mlx->rows)
+	while (i < mapp.rows)
 	{
 		j = 0;
-		while (j < mlx->col - 1)
+		while (j < mapp.columns - 1)
 		{
-			draw_line(mlx, &map[i][j], &map[i][j + 1]);
+			draw_line(mapp, mapp.map1[i][j], mapp.map1[i][j + 1]);
 			j++;
 		}
 		i++;
 	}
 	i = 0;
-	while (i < mlx->rows - 1)
+	while (i < mapp.rows - 1)
 	{
 		j = 0;
-		while (j < mlx->col)
+		while (j < mapp.columns)
 		{
-			draw_line(mlx, &map[i][j], &map[i + 1][j]);
+			draw_line(mapp, mapp.map1[i][j], mapp.map1[i + 1][j]);
 			j++;
 		}
 		i++;
 	}
 }
 
-void draw_line(t_mlx *mlx, t_coord *coord0, t_coord *coord1)
+void	draw_line(t_map mapp, t_coord c0, t_coord c1)
 {
-	int y;
-	int x;
+	double y;
+	double x;
 
-	y = (coord1->crd.y - coord0->crd.y) < 0 ? -(coord1->crd.y - coord0->crd.y)
-										: (coord1->crd.y - coord0->crd.y);
-	x = (coord1->crd.x - coord0->crd.x) < 0 ? -(coord1->crd.x - coord0->crd.x)
-										: (coord1->crd.x - coord0->crd.x);
+	y = c1.crd.y - c0.crd.y;
+	y = y < 0 ? -y : y;
+	x = c1.crd.x - c0.crd.x;
+	x = x < 0 ? -x : x;
 	if (x > y)
 	{
-		if (coord0->crd.x > coord1->crd.x)
-			draw_down(mlx, coord1->crd, coord0->crd);
+		if (c0.crd.x > c1.crd.x)
+			draw_down(mapp, c1.crd, c0.crd);
 		else
-			draw_down(mlx, coord0->crd, coord1->crd);
+			draw_down(mapp, c0.crd, c1.crd);
 	}
 	else
 	{
-		if (coord0->crd.y > coord1->crd.y)
-			draw_up(mlx, coord1->crd, coord0->crd);
+		if (c0.crd.y > c1.crd.y)
+			draw_up(mapp, c1.crd, c0.crd);
 		else
-			draw_up(mlx, coord0->crd, coord1->crd);
+			draw_up(mapp, c0.crd, c1.crd);
 	}
 }
 
-void	draw_down(t_mlx *mlx, t_xy c0, t_xy c1)
+void	draw_down(t_map mapp, t_xy c0, t_xy c1)
 {
-	int dx;
-	int dy;
-	int i;
-	int D;
+	int	dx;
+	int	dy;
+	int	i;
+	int	d;
 
 	dx = c1.x - c0.x;
 	dy = c1.y - c0.y;
@@ -81,28 +81,26 @@ void	draw_down(t_mlx *mlx, t_xy c0, t_xy c1)
 		i = -1;
 		dy = -dy;
 	}
-	D = 2 * dy - dx;
+	d = 2 * dy - dx;
 	while (c0.x < c1.x)
 	{
-		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, c0.x,
-					  c0.y, mlx->color);
-		if (D > 0)
+		put_pixel_to_image(&mapp, c0.x, c0.y, c0.color);
+		if (d > 0)
 		{
 			c0.y = c0.y + i;
-			D = D - 2 * dx;
+			d = d - 2 * dx;
 		}
-		D = D + 2 * dy;
+		d = d + 2 * dy;
 		c0.x++;
-		//mlx->color--;
 	}
 }
 
-void	draw_up(t_mlx *mlx, t_xy c0, t_xy c1)
+void	draw_up(t_map mapp, t_xy c0, t_xy c1)
 {
 	int dx;
 	int dy;
 	int i;
-	int D;
+	int d;
 
 	dx = c1.x - c0.x;
 	dy = c1.y - c0.y;
@@ -112,18 +110,29 @@ void	draw_up(t_mlx *mlx, t_xy c0, t_xy c1)
 		i = -1;
 		dx = -dx;
 	}
-	D = 2 * dx - dy;
+	d = 2 * dx - dy;
 	while (c0.y < c1.y)
 	{
-		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, c0.x,
-					  c0.y, mlx->color);
-		if (D > 0)
+		put_pixel_to_image(&mapp, c0.x, c0.y, c0.color);
+		if (d > 0)
 		{
 			c0.x = c0.x + i;
-			D = D - 2 * dy;
+			d = d - 2 * dy;
 		}
-		D = D + 2 * dx;
+		d = d + 2 * dx;
 		c0.y++;
-		//mlx->color--;
 	}
+}
+
+void	put_pixel_to_image(t_map *mapp, int x, int y, int color)
+{
+	int *data;
+	int bits_per_pixel;
+	int size_line;
+	int endian;
+
+	data = (int *)mlx_get_data_addr(mapp->img_ptr, &bits_per_pixel, \
+	&size_line, &endian);
+	if (x < mapp->win_x && y < mapp->win_y && x > 0 && y > 0)
+		data[x + y * size_line / 4] = color;
 }

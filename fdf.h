@@ -13,34 +13,17 @@
 #ifndef FDF_H
 # define FDF_H
 
-#include "libft.h"
-#include <mlx.h>
-
-typedef struct	s_mod
-{
-	int 		strt_x;
-	int 		strt_y;
-	int 		nl;
-	int 		altd;
-}				t_mod;
-
-typedef struct	s_mlx
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int 		color;
-	int 		col;
-	int			rows;
-	int 		wind_x;
-	int 		wind_y;
-	char 		*map_name;
-	t_mod		mod;
-}				t_mlx;
+# include "libft.h"
+# include <mlx.h>
+# include <math.h>
+# include <locale.h>
 
 typedef struct	s_xy
 {
-	int 		x;
-	int 		y;
+	double		x;
+	double		y;
+	double		z;
+	int			color;
 }				t_xy;
 
 typedef struct	s_coord
@@ -48,10 +31,48 @@ typedef struct	s_coord
 	t_xy		crd;
 }				t_coord;
 
-void			draw_line(t_mlx *mlx, t_coord *coord0, t_coord *coord1);
-void			draw_up(t_mlx *mlx, t_xy c0, t_xy c1);
-void			draw_down(t_mlx *mlx, t_xy c0, t_xy c1);
-t_coord			**parse_map(t_mlx *mlx);
-void			draw_map(t_coord **map, t_mlx *mlx);
+typedef struct	s_map
+{
+	int			win_x;
+	int			win_y;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	int			rows;
+	int			columns;
+	int			scale;
+	int			start_x;
+	int			start_y;
+	double		x;
+	double		y;
+	double		z;
+	t_coord		**map0;
+	t_coord		**map1;
+	int			is_color;
+}				t_map;
+
+void			change_param(int key, t_map *mapp);
+void			change_param_helper(int key, t_map *mapp);
+void			map_init(t_map *mapp);
+void			manage(t_map *mapp);
+void			parse_map(t_map *mapp, char *name);
+void			copy_map(t_map *mapp);
+void			rotate_x(t_map *mapp);
+void			rotate_y(t_map *mapp);
+void			shift_to(t_map *mapp);
+void			shift_from(t_map *mapp);
+void			center(t_map *mapp);
+void			del_map(t_map mapp, t_coord **map);
+void			scale_map(t_map *mapp);
+void			normalize(t_map *mapp);
+void			put_pixel_to_image(t_map *mapp, int x, \
+									int y, int color);
+void			draw_map(t_map mapp);
+void			draw_line(t_map mapp, t_coord c0, t_coord c1);
+void			draw_up(t_map mapp, t_xy c0, t_xy c1);
+void			draw_down(t_map mapp, t_xy c0, t_xy c1);
+void			put_controls(t_map *mapp);
+int				exit_x(void *par);
+void			put_keys(int key);
 
 #endif
