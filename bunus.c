@@ -6,7 +6,7 @@
 /*   By: vfil <vfil@student.unit.ua>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:46:18 by vfil              #+#    #+#             */
-/*   Updated: 2018/02/23 16:46:19 by vfil             ###   ########.fr       */
+/*   Updated: 2018/02/24 16:31:58 by vfil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	put_controls_helper(t_map *mapp)
 	mapp->win_y - 250 + 25, 0xE4CFA6, "CHANGE COLOR (random)");
 	mlx_string_put(mapp->mlx_ptr, mapp->win_ptr, mapp->win_x - 900, \
 	mapp->win_y - 250 + 60, 0xE4CFA6, "       SPACE");
-
 	mlx_string_put(mapp->mlx_ptr, mapp->win_ptr, mapp->win_x - 600, \
 	mapp->win_y - 250 + 25, 0xE4CFA6, "MOVE IMG (arrows)");
 	mlx_string_put(mapp->mlx_ptr, mapp->win_ptr, mapp->win_x - 600, \

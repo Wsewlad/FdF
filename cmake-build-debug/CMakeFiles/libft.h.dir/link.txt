@@ -1,1 +1,0 @@
-/usr/bin/gcc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/libft.h.dir/main.c.o CMakeFiles/libft.h.dir/parse_map.c.o CMakeFiles/libft.h.dir/draw_map.c.o CMakeFiles/libft.h.dir/rotate.c.o CMakeFiles/libft.h.dir/shift.c.o CMakeFiles/libft.h.dir/del_copy_scale_center.c.o  -o libft.h 

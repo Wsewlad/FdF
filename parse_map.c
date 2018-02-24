@@ -6,7 +6,7 @@
 /*   By: vfil <vfil@student.unit.ua>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 18:03:13 by vfil              #+#    #+#             */
-/*   Updated: 2018/02/14 18:03:15 by vfil             ###   ########.fr       */
+/*   Updated: 2018/02/24 16:40:26 by vfil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static int	count_rows(char *name)
 			rows++;
 	}
 	close(fd);
+	if (!rows)
+	{
+		ft_printf("{red}File is incorrect %S{eoc}\n", L"¯\\_(ツ)_/¯");
+		exit(1);
+	}
 	return (rows);
 }
 
